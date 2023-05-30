@@ -1,0 +1,52 @@
+.button {
+    font-family: var(--font-title);
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+
+    &-icon {
+        display: flex;
+        
+        margin-left: 5px;
+    }
+
+    &_view {
+        &_white {
+            font-weight: 600;
+            color: var(--text-color-base);
+            background: #FFFFFF;
+            border-radius: 8px;
+        }
+
+        &_dark {
+            color: var(--text-color-second);
+            background: #232323;
+            border-radius: 8px;
+        }
+
+        &_action {
+            font-weight: 600;
+            background: #F4FF7A;
+            color: #121212;
+            border-radius: 8px;
+        }
+    }
+    
+    &_size {
+        &_m {
+            font-size: 18px;
+            line-height: 120%;
+
+            padding: 13px 27px;
+        }
+
+        &_s {
+            padding: 8px 12px;
+            font-size: 14px;
+            line-height: 17px;
+        }
+    }
+}

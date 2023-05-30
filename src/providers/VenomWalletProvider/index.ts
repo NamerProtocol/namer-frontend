@@ -1,0 +1,1 @@
+export { VenomWalletProvider } from './VenomWalletProvider';

@@ -1,0 +1,86 @@
+.popularZones {
+    width: 100%;
+
+    &-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 30px;
+    }
+
+    &-content {
+        display: flex;
+
+        width: 100%;
+        overflow-x: auto;
+
+        padding-bottom: 10px;
+
+        &::-webkit-scrollbar {
+            height: 10px;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+
+            background-color: #17171A;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        & .popularZonesItem {
+            &:not(:last-child) {
+                margin-right: 16px;
+            }
+        }
+    }
+}
+
+.popularZonesItem {
+    width: 200px;
+
+    background: #17171A;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+
+    &-title {
+        padding: 20px;
+
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+
+        color: #FFFFFF;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    &-info {
+        display: grid;
+
+        grid-template-columns: 50% 50%;
+        gap: 12px;
+        
+        padding: 16px;
+
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+
+
+        &-label {
+            color: rgba(255, 255, 255, 0.4);
+
+            margin-bottom: 3px;
+        }
+
+        &-value {
+            color: #FFFFFF;
+        }
+    }
+}

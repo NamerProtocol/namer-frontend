@@ -1,0 +1,17 @@
+.wallet {
+    &-action {
+        cursor: pointer;
+        
+        padding: 11px 20px;
+        
+        background: #FFFFFF;
+        border-radius: 8px; 
+
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 120%;
+
+        color: #121212;
+    }
+}

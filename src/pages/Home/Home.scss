@@ -1,0 +1,29 @@
+.home {
+    &-title {
+        text-align: center;
+
+        margin-bottom: 32px;
+    }
+
+    &-input {
+        max-width: 100%;
+        width: 700px;
+
+        margin-bottom: 70px;
+
+
+        display: flex;
+        align-items: center;
+
+        padding: 16px;
+
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(2px);
+
+        border-radius: 20px;
+
+        & .input {
+            width: 100%;
+        }
+    }
+}

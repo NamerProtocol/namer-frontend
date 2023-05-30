@@ -1,0 +1,1 @@
+export { SearchDomainNames } from './SearchDomainNames';

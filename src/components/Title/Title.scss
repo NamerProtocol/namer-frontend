@@ -1,0 +1,48 @@
+.title {
+    font-family: var(--font-title);
+    font-style: normal;
+
+    &_uppercase {
+        text-transform: uppercase;
+    }
+
+    &_shadow {
+        text-shadow: 0px 0px 6px #F3FD87;
+    }
+
+    &_view {
+        &_yellow {
+            color: #F4FF7A;
+        }
+
+        &_black {
+            color: #121212;
+        }
+    }
+
+    &_size {
+        &_l {
+            font-weight: 900;
+            font-size: 72px;
+            line-height: 88px;
+        }
+
+        &_s {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+        }
+
+        &_xs {
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 27px;
+        }
+
+        &_xxs {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+}

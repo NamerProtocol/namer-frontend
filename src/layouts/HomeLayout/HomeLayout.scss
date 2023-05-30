@@ -1,0 +1,43 @@
+.homeLayout {
+    position: relative;
+
+    height: 100vh;
+
+    background: rgb(var(--background-rgb));
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        max-width: 1328px;
+        margin: 0 auto;
+
+        margin-top: 108px;
+    }
+
+    &-background {
+        z-index: -1;
+        position: absolute;
+        width: 100%;
+        
+        display: flex;
+        justify-content: space-between;
+
+        left: 0;
+
+        & img {
+            position: absolute;
+
+            &:first-child {
+                left: 0px;
+                top: 0px;
+            }
+
+            &:last-child {
+                right: 0px;
+                top: 0px;
+            }
+        }
+    }
+}

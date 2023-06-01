@@ -1,0 +1,1 @@
+export { BuyDomainModal } from './BuyDomainModal';

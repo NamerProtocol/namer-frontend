@@ -6,3 +6,4 @@ export { Input } from './Input';
 export { PopularZones } from './PopularZones';
 export { Wallet } from './Wallet';
 export { BuyButton } from './BuyButton';
+export { Modal } from './Modal';

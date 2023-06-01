@@ -3,6 +3,8 @@ import { ReactComponent as Search } from './icons/search.svg';
 import { ReactComponent as Logo } from './icons/logo.svg';
 import { ReactComponent as Cart } from './icons/cart.svg';
 import { ReactComponent as Venom } from './icons/venom.svg';
+import { ReactComponent as Close } from './icons/close.svg';
+import { ReactComponent as Namer } from './icons/namer.svg';
 
 export const Icons = {
     Search,
@@ -10,4 +12,6 @@ export const Icons = {
     Logo,
     Cart,
     Venom,
+    Close,
+    Namer,
 };

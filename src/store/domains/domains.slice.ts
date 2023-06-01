@@ -6,6 +6,13 @@ export interface DomainsState {
     fetchStatus: FetchStatus;
     domains: Domain[];
     owned: Domain[];
+    domainsSearch: {
+        exactMatch: Domain | null;
+        zone: Domain | null;
+        similarZones: Domain[];
+        differentZones: Domain[];
+        similarNames: Domain[];
+    };
     search: string;
 }
 
@@ -14,6 +21,13 @@ const initialState: DomainsState = {
     domains: [],
     owned: [],
     search: '',
+    domainsSearch: {
+        exactMatch: null,
+        zone: null,
+        similarNames: [],
+        differentZones: [],
+        similarZones: [],
+    },
 };
 
 export const domainsSlice = createSlice<
@@ -39,7 +53,7 @@ export const domainsSlice = createSlice<
             domainsActions.fetchDomainsByKeyword.fulfilled,
             (state, { payload }) => {
                 state.fetchStatus = FetchStatus.FETCHED;
-                state.domains = payload;
+                state.domainsSearch = payload;
             },
         );
 

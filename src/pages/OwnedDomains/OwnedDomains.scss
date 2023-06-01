@@ -1,0 +1,16 @@
+.ownedDomains {
+    & .pageLayout-content {
+        max-width: 1100px;
+        margin: 0 auto;
+
+        padding-top: 40px;
+    }
+
+    &-domains {
+        padding: 16px;
+
+        background: #FFFFFF;
+        border: 1px solid #DBDBDB;
+        border-radius: 8px
+    }
+}

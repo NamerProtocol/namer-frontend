@@ -1,1 +1,0 @@
-export { SearchDomainNames } from './SearchDomainNames';

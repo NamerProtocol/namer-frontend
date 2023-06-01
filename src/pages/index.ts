@@ -1,2 +1,3 @@
 export { Home } from './Home';
-export { SearchDomainNames } from './SearchDomainNames';
+export { SearchDomains } from './SearchDomains';
+export { OwnedDomains } from './OwnedDomains';

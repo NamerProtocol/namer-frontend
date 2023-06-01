@@ -1,0 +1,1 @@
+export { DomainsList } from './DomainsList';

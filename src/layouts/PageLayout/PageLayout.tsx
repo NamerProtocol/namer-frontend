@@ -4,7 +4,7 @@ import { PageHeader } from 'components';
 
 import './PageLayout.scss';
 
-const CnPageLayout = cn('PageLayout');
+const CnPageLayout = cn('pageLayout');
 
 interface IPageLayoutProps {
     children: React.ReactNode;

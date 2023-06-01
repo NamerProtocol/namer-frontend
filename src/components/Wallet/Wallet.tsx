@@ -4,6 +4,7 @@ import { useVenom } from 'hooks';
 import { FC, memo, useCallback, useEffect } from 'react';
 
 import './Wallet.scss';
+import { getFormattedAddress } from 'utils/getFormattedAddress';
 
 const CnWallet = cn('wallet');
 
@@ -22,17 +23,18 @@ export const Wallet: FC = memo(() => {
 
     return (
         <div className={CnWallet()}>
-            {/* {address ? (
-                <Button onClick={sendTransactionClickCallback}>
-                    Send Transaction
-                </Button>
+            {address ? (
+                <div className={CnWallet('action')}>
+                    {getFormattedAddress(address)}
+                </div>
             ) : (
-                <Button onClick={connectClickCallback}>Connect</Button>
-            )} */}
-
-            <div onClick={connectClickCallback} className={CnWallet('action')}>
-                Connect
-            </div>
+                <div
+                    onClick={connectClickCallback}
+                    className={CnWallet('action')}
+                >
+                    Connect
+                </div>
+            )}
         </div>
     );
 });

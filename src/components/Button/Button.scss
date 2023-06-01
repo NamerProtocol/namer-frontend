@@ -6,7 +6,8 @@
 
     display: flex;
     align-items: center;
-
+    justify-content: center;
+    
     &-icon {
         display: flex;
         
@@ -24,6 +25,12 @@
         &_dark {
             color: var(--text-color-second);
             background: #232323;
+            border-radius: 8px;
+        }
+
+        &_bordered {
+            background: #F9F9F9;
+            border: 1px solid #E1E1E1;
             border-radius: 8px;
         }
 

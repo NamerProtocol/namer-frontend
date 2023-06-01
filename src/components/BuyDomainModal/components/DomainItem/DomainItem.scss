@@ -1,0 +1,58 @@
+.domainItem {
+    padding: 8px 0px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-left {
+        display: flex;
+        align-items: center;
+    }
+
+    &-name {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+
+        color: #FFFFFF;
+    }
+
+    &-icon {
+        width: 32px;
+        height: 32px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: #FFFFFF;
+        border-radius: 4px;
+
+        margin-right: 12px;
+    }
+
+    &-price {
+        display: flex;
+        align-items: center;
+        
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 27px;
+
+        color: #FFFFFF;
+
+        & svg {
+            margin-right: 8px;
+            
+            width: 32px;
+            height: 32px;
+
+            & path {
+                fill: #FFFFFF;
+            }
+        }
+    }
+}

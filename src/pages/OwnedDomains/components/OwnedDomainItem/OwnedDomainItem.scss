@@ -1,0 +1,80 @@
+.ownedDomainItem {
+    width: 100%;
+
+    padding: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-name {
+        width: 50%;
+
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 27px;
+
+        color: #121212;
+    }
+
+    &-expire {
+        display: flex;
+        align-items: center;
+
+        font-style: normal;
+        font-size: 16px;
+        line-height: 24px;
+
+        &-label {
+            font-weight: 400;
+
+            color: #717171;
+
+            margin-right: 8px;
+        }
+
+        &-date {
+            font-weight: 500;
+
+            color: #121212;
+        }
+    }
+
+    &-price {
+        display: flex;
+        align-items: center;
+
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+
+        color: #121212;
+
+        margin-right: 16px;
+        
+        & svg {
+            margin-right: 4px;
+
+            & path {
+                fill: #A0A0A0;
+            }
+        }
+    }
+
+    &-left {
+        width: 50%;
+
+        display: flex;
+        align-items: center;
+    }
+
+    &-right {
+        width: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}

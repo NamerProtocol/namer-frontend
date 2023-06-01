@@ -10,7 +10,7 @@ interface IButtonProps
         React.ButtonHTMLAttributes<HTMLButtonElement>,
         HTMLButtonElement
     > {
-    view?: 'white' | 'dark' | 'action';
+    view?: 'white' | 'dark' | 'action' | 'bordered';
     size?: 'm' | 's';
     icon?: React.ReactNode;
 }

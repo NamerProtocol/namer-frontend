@@ -7,7 +7,7 @@ const CnTitle = cn('title');
 
 interface ITitleProps {
     children: string;
-    view?: 'yellow' | 'black';
+    view?: 'yellow' | 'black' | 'white';
     size?: 'l' | 's' | 'm' | 'xs' | 'xxs';
     className?: string;
     uppercase?: boolean;

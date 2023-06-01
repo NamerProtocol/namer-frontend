@@ -1,1 +1,0 @@
-export { DomainNames } from './DomainNames';

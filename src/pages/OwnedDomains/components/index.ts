@@ -1,0 +1,1 @@
+export { OwnedDomainItem } from './OwnedDomainItem';

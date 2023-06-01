@@ -1,0 +1,1 @@
+export { OwnedDomains } from './OwnedDomains';

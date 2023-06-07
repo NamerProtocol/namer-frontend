@@ -1,0 +1,32 @@
+.manageDomains {
+    & .backButton {
+        margin-bottom: 20px;
+    }
+
+    & .pageLayout-content {
+        max-width: 1100px;
+        margin: 0 auto;
+
+        padding: 20px 0;
+    }
+
+    &-content {
+        overflow: hidden;
+        
+        background: #FFFFFF;
+        border: 1px solid #DBDBDB;
+        border-radius: 8px;
+
+        display: flex;
+    }
+
+    &-form {
+        width: 100%;
+
+        padding: 40px;
+    }
+
+    &-navigation {
+        background: #F1F1F1;
+    }
+}

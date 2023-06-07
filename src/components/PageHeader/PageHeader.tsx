@@ -1,12 +1,12 @@
 import { cn } from '@bem-react/classname';
 import { FC, memo, useCallback } from 'react';
-import { Input, Wallet } from 'components';
+import { Button, Input, Wallet } from 'components';
 import { Icons } from 'assets';
 
 import './PageHeader.scss';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { domainsActions, domainsSelectors } from 'store';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const CnPageHeader = cn('pageHeader');
 
@@ -29,7 +29,7 @@ export const PageHeader: FC = memo(() => {
             if (e.key === 'Enter') {
                 dispatch(domainsActions.fetchDomainsByKeyword(search));
                 if (location.pathname !== '/search') {
-                    navigate('');
+                    navigate('/search');
                 }
             }
         },
@@ -40,7 +40,9 @@ export const PageHeader: FC = memo(() => {
         <div className={CnPageHeader()}>
             <div className={CnPageHeader('content')}>
                 <div className={CnPageHeader('left')}>
-                    <Icons.Logo className={CnPageHeader('logo')} />
+                    <Link to="/">
+                        <Icons.Logo className={CnPageHeader('logo')} />
+                    </Link>
 
                     <div className={CnPageHeader('search')}>
                         <Input
@@ -57,6 +59,7 @@ export const PageHeader: FC = memo(() => {
                 </div>
 
                 <div className={CnPageHeader('action')}>
+                    <Link to="/account/domains">My domains</Link>
                     <Wallet />
                 </div>
             </div>

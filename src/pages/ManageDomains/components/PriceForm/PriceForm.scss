@@ -1,0 +1,44 @@
+.priceForm {
+    & .title {
+        margin-bottom: 32px;
+    }
+
+    &-action {
+        width: 160px;
+
+        & .button {
+            width: 100%;
+
+            &:disabled {
+                background-color: #D1D2D6;
+                color: #171C34;
+            }
+        }
+    }
+
+    &-item {
+        margin-bottom: 32px;
+
+        &-label {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 120%;
+
+            color: #121212;
+
+            margin-bottom: 4px;
+        }
+
+        &-sublabel {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 120%;
+
+            color: #717171;
+
+            margin-bottom: 8px;
+        }
+    }
+}

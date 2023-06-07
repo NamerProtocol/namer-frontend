@@ -1,31 +1,138 @@
 .buyDomainModal {
-    min-width: 480px;
+    max-width: 880px;
+
+    &-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-info {
+        width: 50%;
+
+        padding-right: 24px;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+
+        &-text {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+
+            color: #FFFFFF;
+        }
+    }
+
+    &-form {
+        width: 50%;
+        padding-left: 24px;
+
+        &-item {
+            margin-bottom: 20px;
+
+            &_counter {
+                margin-top: 30px;
+            }
+
+            &-label {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 120%;
+
+                color: #FFFFFF;
+
+                margin-bottom: 4px;
+            }
+
+            &-descr {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 13px;
+                line-height: 120%;
+
+                color: #717171;
+
+                margin-bottom: 8px;
+            }
+        }
+
+        &-info {
+            margin-top: 32px;
+            margin-bottom: 16px;
+
+            &-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                padding: 13.5px 0px;
+
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+                &-label {
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 21px;
+
+                    color: rgba(255, 255, 255, 0.4);
+                }
+
+
+                &-price {
+                    display: flex;
+                    align-items: center;
+
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 21px;
+
+                    color: #FFFFFF;
+
+                    &_total {
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+
+                    & svg {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+
+        &-action {
+            width: 100%;
+
+            & .button {
+                width: 100%;
+            }
+        }
+    }
 
     & .title {
-        margin-bottom: 16px;
+        margin-bottom: 30px;
     }
 
     &-domain {
         display: flex;
         align-items: center;
 
-        padding-top: 20px;
-
-        border-top: 1px solid rgba(255, 255, 255, 0.2);;
+        margin-bottom: 24px;
 
         &-image {
-            margin-right: 24px;
+            display: flex;
 
+            margin-right: 16px;
+            
             & img {
+                width: 80px;
+                height: 80px;
+
                 border-radius: 8px;
-
-                width: 164px;
-                height: 164px;
             }
-        }
-
-        &-content {
-            width: 100%;
         }
 
         &-name {
@@ -35,60 +142,97 @@
             line-height: 27px;
 
             color: #FFFFFF;
-
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
-            padding-bottom: 32px;
-            padding-top: 20px;
-        }
-
-        &-price {
-            padding: 12px;
-            padding-bottom: 16px;
-            
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            &-label {
-                font-style: normal;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 21px;
-
-                color: rgba(255, 255, 255, 0.4);
-            }
-
-            &-value {
-                display: flex;
-                align-items: center;
-
-                font-style: normal;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 24px;
-
-                color: #FFFFFF;
-
-                & svg {
-                    margin-right: 8px;
-                    
-                    width: 24px;
-                    height: 24px;
-
-                    & path {
-                        fill: #FFFFFF;
-                    }
-                }
-            }
-        }
-
-        &-action {
-            & .button {
-                width: 100%;
-            }
         }
     }
+
+    // & .title {
+    //     margin-bottom: 16px;
+    // }
+
+    // &-domain {
+    //     display: flex;
+    //     align-items: center;
+
+    //     padding-top: 20px;
+
+    //     border-top: 1px solid rgba(255, 255, 255, 0.2);;
+
+    //     &-image {
+    //         margin-right: 24px;
+
+    //         & img {
+    //             border-radius: 8px;
+
+    //             width: 164px;
+    //             height: 164px;
+    //         }
+    //     }
+
+    //     &-content {
+    //         width: 100%;
+    //     }
+
+    //     &-name {
+    //         font-style: normal;
+    //         font-weight: 500;
+    //         font-size: 18px;
+    //         line-height: 27px;
+
+    //         color: #FFFFFF;
+
+    //         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    //         padding-bottom: 32px;
+    //         padding-top: 20px;
+    //     }
+
+    //     &-price {
+    //         padding: 12px;
+    //         padding-bottom: 16px;
+            
+    //         display: flex;
+    //         justify-content: space-between;
+    //         align-items: center;
+
+    //         &-label {
+    //             font-style: normal;
+    //             font-weight: 400;
+    //             font-size: 14px;
+    //             line-height: 21px;
+
+    //             color: rgba(255, 255, 255, 0.4);
+    //         }
+
+    //         &-value {
+    //             display: flex;
+    //             align-items: center;
+
+    //             font-style: normal;
+    //             font-weight: 500;
+    //             font-size: 16px;
+    //             line-height: 24px;
+
+    //             color: #FFFFFF;
+
+    //             & svg {
+    //                 margin-right: 8px;
+                    
+    //                 width: 24px;
+    //                 height: 24px;
+
+    //                 & path {
+    //                     fill: #FFFFFF;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     &-action {
+    //         & .button {
+    //             width: 100%;
+    //         }
+    //     }
+    // }
 
     // & .title {
     //     margin-bottom: 32px;

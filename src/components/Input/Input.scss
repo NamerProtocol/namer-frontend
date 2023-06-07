@@ -6,7 +6,6 @@
 
     &-input {
         width: 100%;
-        font-weight: 500;
         font-style: normal;
 
         border: none;
@@ -37,6 +36,7 @@
             &_search {
                 background: #121212;
                 border-radius: 12px;
+                font-weight: 500;
 
                 color: #fff;
 
@@ -54,6 +54,22 @@
                 &:placeholder {
                     color: #D1D2D6;
                 }
+            }
+
+            &_dark {
+                background: #202020;
+                border-radius: 8px;
+                font-weight: 500;
+
+                color: #FFFFFF;
+            }
+
+            &_gray {
+                background: #F1F1F1;
+                border-radius: 8px;
+                font-weight: 500;
+
+                color: #171C34;
             }
         }
     }

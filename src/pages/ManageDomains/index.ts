@@ -1,0 +1,1 @@
+export { ManageDomains } from './ManageDomains';

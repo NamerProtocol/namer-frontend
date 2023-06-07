@@ -1,0 +1,1 @@
+export { RoyaltySettingsForm } from './RoyaltySettingsForm';

@@ -1,0 +1,93 @@
+.buyDomainSuccessModal {
+    min-width: 480px;
+
+    & .modal-content {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    & .title {
+        margin-bottom: 32px;
+    }
+
+    &-image {
+        display: flex;
+
+        margin-right: 24px;
+
+        & img {
+            width: 160px;
+            height: 160px;
+
+            border-radius: 8px;
+        }
+    }
+
+    &-domain {
+        width: calc(100% - 160px);
+
+        & svg {
+            height: 120px;
+            width: 120px;
+        }
+    }
+
+    &-domain {
+        &-name {
+            padding-top: 21px;
+            padding-bottom: 32px;
+
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 27px;
+
+            color: #FFFFFF;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    &-action {
+        & .button {
+            width: 100%;
+        }
+    }
+
+    &-price {
+        margin-top: 12px;
+        margin-bottom: 16px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-label {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        &-value {
+            display: flex;
+            align-items: center;
+
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+
+            color: #FFFFFF;
+
+            & svg {
+                width: 24px;
+                height: 24px;
+
+                margin-right: 8px;
+            }
+        }
+    }
+}

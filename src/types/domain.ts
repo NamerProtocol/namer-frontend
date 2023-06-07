@@ -9,4 +9,5 @@ export interface Domain {
     linkedAddresses: { chain: string; address: string }[];
     subDomains: string[];
     subPrice: number;
+    additionalData?: any;
 }

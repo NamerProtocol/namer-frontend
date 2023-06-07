@@ -7,3 +7,8 @@ export { PopularZones } from './PopularZones';
 export { Wallet } from './Wallet';
 export { BuyButton } from './BuyButton';
 export { Modal } from './Modal';
+export { Counter } from './Counter';
+export { BuyDomainSuccessModal } from './BuyDomainSuccessModal';
+export { BuyDomainLoaderModal } from './BuyDomainLoaderModal';
+export { BuyDomainModal } from './BuyDomainModal';
+export { BackButton } from './BackButton';

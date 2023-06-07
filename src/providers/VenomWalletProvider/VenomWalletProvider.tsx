@@ -5,6 +5,12 @@ import { VenomConnect } from 'thrmdy-venom-connect';
 import { VenomWalletContext } from './VenomWalletProvider.constants';
 import { nftContractABI } from './NftContract.abi';
 import { nftItemABI } from './NftItem.abi';
+import { Domain } from 'types';
+import {
+    fetchDomainCreateRequest,
+    fetchDomainUpdateRequest,
+} from 'api/domains';
+import { useNavigate } from 'react-router-dom';
 
 const initTheme = 'dark' as const;
 
@@ -54,6 +60,8 @@ const initVenomConnect = async () => {
 const themesList = ['light', 'dark', 'venom'];
 
 export const VenomWalletProvider: FC<any> = ({ children }) => {
+    const navigate = useNavigate();
+
     const [venomConnect, setVenomConnect] = useState<VenomConnect | null>(null);
     const [venomProvider, setVenomProvider] = useState<any>();
     const [venomStandalone, setVenomStandalone] = useState<any>();
@@ -145,7 +153,7 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
         if (_provider && _address)
             setTimeout(() => {
                 check(_provider);
-            }, 1000);
+            }, 10000);
     }, []);
 
     const onConnect = async (provider: any) => {
@@ -169,11 +177,10 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
             // The only one difference - usage of .send() function
             // When we use send(), firstly we call our venom wallet (logged user's wallet) and then venom wallet will call our target contract internally (by sendTransaction method)
             // So you need to call send() when you own callee internally (by wallet address)
-            const result = await tokenWalletContract.methods
-                .mintNft({ json: `{ name: 'hello world' }` })
-                .send({ from: address, amount: String(0.5 * 10 ** 9) });
+            await tokenWalletContract.methods
+                .mint()
+                .send({ from: address, amount: String(1 * 10 ** 9) });
             // .send({ from: new Address(address), amount: getValueForSend(1), bounce: true });
-            console.log(result);
         } catch (e) {
             console.error(e);
         }
@@ -218,6 +225,62 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
         return addresses?.accounts;
     };
 
+    const buyDomain = useCallback(
+        async (domain: Domain, price: string, totalPrice: string) => {
+            try {
+                navigate('?modal=buyDomainLoader');
+
+                if (!venomProvider) return;
+                // TokenWallet address was passed here from somewhere (from NftAuction component)
+                const tokenWalletContract = new venomProvider.Contract(
+                    nftContractABI,
+                    new Address(
+                        '0:85ac9e08f378369780c070b0490e84f55d523327e4adb645915e17422fce967b',
+                    ),
+                );
+                console.log(tokenWalletContract);
+                // Just a common call of smart contract, nothing special and pretty easy
+                // The only one difference - usage of .send() function
+                // When we use send(), firstly we call our venom wallet (logged user's wallet) and then venom wallet will call our target contract internally (by sendTransaction method)
+                // So you need to call send() when you own callee internally (by wallet address)
+                // await tokenWalletContract.methods.mint().send({
+                //     from: address,
+                //     amount: String(Number(totalPrice) * 10 ** 9),
+                // });
+                await tokenWalletContract.methods
+                    .mintNft({ json: `{ name: 'hello world' }` })
+                    .send({
+                        from: address,
+                        amount: String(Number(totalPrice) * 10 ** 9),
+                    });
+                // .send({ from: new Address(address), amount: getValueForSend(1), bounce: true });
+
+                if (domain.id) {
+                    await fetchDomainUpdateRequest({
+                        id: domain.id,
+                        owner: address,
+                        price: Number(price),
+                    });
+                } else {
+                    await fetchDomainCreateRequest({
+                        price: Number(price),
+                        parentId: domain.parentId
+                            ? domain.parentId
+                            : '383ab958-5225-4f4e-9fa1-1a037a25b163',
+                        owner: address,
+                        name: domain.name,
+                    });
+                }
+                navigate('?modal=buyDomainSuccess');
+            } catch (err) {
+                console.log(err);
+                navigate('?modal=buyDomain');
+            } finally {
+            }
+        },
+        [address, navigate, venomProvider],
+    );
+
     useEffect(() => {
         const off = venomConnect?.on('connect', onConnect);
 
@@ -236,6 +299,7 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
                 balance,
                 sendTransaction,
                 getNftCodeHash,
+                buyDomain,
             }}
         >
             {children}

@@ -1,15 +1,22 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { cn } from '@bem-react/classname';
 import { Domain } from 'types';
 import { Icons } from 'assets';
 import moment from 'moment';
+import { Button } from 'components';
+import { useNavigate } from 'react-router-dom';
 
 import './OwnedDomainItem.scss';
-import { Button } from 'components';
 
 const CnOwnedDomainItem = cn('ownedDomainItem');
 
-export const OwnedDomainItem: FC<Domain> = ({ fullName, price }) => {
+export const OwnedDomainItem: FC<Domain> = ({ fullName, price, id }) => {
+    const navigate = useNavigate();
+
+    const clickCallback = useCallback(() => {
+        navigate(`/domains/${id}/manage`);
+    }, [navigate, id]);
+
     return (
         <div className={CnOwnedDomainItem()}>
             <div className={CnOwnedDomainItem('left')}>
@@ -29,7 +36,7 @@ export const OwnedDomainItem: FC<Domain> = ({ fullName, price }) => {
                     {price}
                 </div>
 
-                <Button view="bordered" size="s">
+                <Button onClick={clickCallback} view="bordered" size="s">
                     Manage
                 </Button>
             </div>

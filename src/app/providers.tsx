@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { VenomWalletProvider } from 'providers';
+import { Router } from 'providers';
 import { Provider } from 'react-redux';
 import { store } from 'store';
 
-export const Providers: FC<{ children: any }> = ({ children }) => {
+export const Providers: FC = () => {
     return (
         <Provider store={store}>
-            <VenomWalletProvider>{children}</VenomWalletProvider>
+            <Router />
         </Provider>
     );
 };

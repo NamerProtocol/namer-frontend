@@ -1,0 +1,37 @@
+.buyDomainLoaderModal {
+    min-width: 480px;
+
+    & .modal-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    & .title {
+        margin-bottom: 32px;
+    }
+
+    &-image {
+        display: flex;
+
+        & img {
+            width: 160px;
+            height: 160px;
+
+            border-radius: 8px;
+        }
+    }
+
+    &-loader {
+        width: calc(100% - 160px);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & svg {
+            height: 120px;
+            width: 120px;
+        }
+    }
+}

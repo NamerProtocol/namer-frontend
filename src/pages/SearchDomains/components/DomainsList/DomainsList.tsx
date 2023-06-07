@@ -1,12 +1,13 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { cn } from '@bem-react/classname';
 import { Domain } from 'types';
 import { BuyButton } from 'components';
 import { Icons } from 'assets';
-import { useAppSelector } from 'hooks';
-import { domainsSelectors } from 'store';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { buyDomainActions, domainsSelectors } from 'store';
 
 import './DomainsList.scss';
+import { useNavigate } from 'react-router-dom';
 
 const CnDomainsList = cn('domainsList');
 
@@ -28,11 +29,17 @@ const CnDomainsListItem = cn('domainsListItem');
 
 interface IDomainsListItem extends Domain {}
 
-export const DomainsListItem: FC<IDomainsListItem> = ({
-    fullName,
-    price,
-    level,
-}) => {
+export const DomainsListItem: FC<IDomainsListItem> = (domain) => {
+    const { fullName, price, level } = domain;
+
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const buyClickHandler = useCallback(() => {
+        dispatch(buyDomainActions.setDomainToBuy(domain));
+        navigate('?modal=buyDomain');
+    }, [dispatch, domain, navigate]);
+
     return (
         <div className={CnDomainsListItem()}>
             <div className={CnDomainsListItem('name')}>
@@ -46,7 +53,7 @@ export const DomainsListItem: FC<IDomainsListItem> = ({
                     {price}
                 </div>
                 <div className={CnDomainsListItem('button')}>
-                    <BuyButton />
+                    <BuyButton onBuyClick={buyClickHandler} />
                 </div>
             </div>
         </div>

@@ -11,13 +11,18 @@ interface IBuyButtonProps {
     onAddToCartClick?: () => void;
 }
 
-export const BuyButton: FC<IBuyButtonProps> = () => {
+export const BuyButton: FC<IBuyButtonProps> = ({
+    onAddToCartClick,
+    onBuyClick,
+}) => {
     return (
         <div className={CnBuyButton()}>
-            <div className={CnBuyButton('label')}>Buy now</div>
-            <div className={CnBuyButton('icon')}>
-                <Icons.Cart />
+            <div onClick={onBuyClick} className={CnBuyButton('label')}>
+                Buy now
             </div>
+            {/* <div onClick={onAddToCartClick} className={CnBuyButton('icon')}>
+                <Icons.Cart />
+            </div> */}
         </div>
     );
 };

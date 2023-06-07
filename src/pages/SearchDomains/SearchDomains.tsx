@@ -14,9 +14,17 @@ export const SearchDomains: FC = () => {
     const domainsSearch = useAppSelector(domainsSelectors.domainsSearch);
 
     const domainNamesItems = useMemo(() => {
-        if (!domainsSearch.exactMatch) return [];
+        const result: any = [];
 
-        return [domainsSearch.exactMatch, ...domainsSearch.differentZones];
+        if (!domainsSearch.exactMatch) return result;
+
+        if (domainsSearch.exactMatch?.level !== 1) {
+            result.push(domainsSearch.exactMatch);
+        }
+
+        result.push(...domainsSearch.differentZones);
+
+        return result;
     }, [domainsSearch]);
 
     const domainSimilarItems = useMemo(() => {

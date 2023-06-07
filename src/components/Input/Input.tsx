@@ -11,7 +11,7 @@ interface IInputProps
         HTMLInputElement
     > {
     inputSize?: 'l' | 'm' | 's';
-    view?: 'search' | 'white';
+    view?: 'search' | 'white' | 'dark' | 'gray';
     icon?: React.ReactNode;
     bordered?: boolean;
 }

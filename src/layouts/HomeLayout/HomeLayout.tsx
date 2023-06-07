@@ -17,10 +17,10 @@ export const HomeLayout: FC<IHomeLayoutProps> = memo(
     ({ children, className }) => {
         return (
             <div className={CnHomeLayout({}, className)}>
-                <div className={CnHomeLayout('background')}>
+                {/* <div className={CnHomeLayout('background')}>
                     <img src={bg1} alt="" width={447} height={418} />
                     <img src={bg2} alt="" width={419} height={418} />
-                </div>
+                </div> */}
                 <HomeHeader />
                 <div className={CnHomeLayout('content')}>{children}</div>
             </div>

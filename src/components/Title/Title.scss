@@ -25,6 +25,12 @@
     }
 
     &_size {
+        &_xl {
+            font-weight: 900;
+            font-size: 100px;
+            line-height: 100px;
+        }
+
         &_l {
             font-weight: 900;
             font-size: 72px;

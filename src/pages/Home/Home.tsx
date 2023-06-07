@@ -35,23 +35,25 @@ export const Home: FC = () => {
 
     return (
         <HomeLayout>
-            <Title className={CnHome('title')} uppercase shadow>
-                Find your domain
-            </Title>
-            <div className={CnHome('input')}>
-                <Input
-                    onKeyDown={onKeyDown}
-                    value={search}
-                    onChange={searchChangeCallback}
-                    inputSize="l"
-                    view="search"
-                    placeholder="Search"
-                    icon={<Icons.Search />}
-                    bordered
-                />
+            <div className={CnHome()}>
+                <Title size="xl" className={CnHome('title')} uppercase shadow>
+                    Find your domain
+                </Title>
+                <div className={CnHome('input')}>
+                    <Input
+                        onKeyDown={onKeyDown}
+                        value={search}
+                        onChange={searchChangeCallback}
+                        inputSize="l"
+                        view="search"
+                        placeholder="Search"
+                        icon={<Icons.Search />}
+                        bordered
+                    />
+                </div>
             </div>
 
-            <PopularZones />
+            {/* <PopularZones /> */}
         </HomeLayout>
     );
 };

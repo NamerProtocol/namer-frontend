@@ -1,13 +1,16 @@
 .home {
+    animation: comeToMe 3s ease;
+
     &-title {
         text-align: center;
 
         margin-bottom: 32px;
+        max-width: 600px;
     }
 
     &-input {
         max-width: 100%;
-        width: 700px;
+        width: 600px;
 
         margin-bottom: 70px;
 
@@ -25,5 +28,15 @@
         & .input {
             width: 100%;
         }
+    }
+}
+
+@keyframes comeToMe {
+    0% {
+        transform: scale(0.1);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

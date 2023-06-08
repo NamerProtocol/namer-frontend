@@ -260,7 +260,7 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
                     .mintNft({
                         root: parentDomain.address,
                         name: domain.name,
-                        hPrice: String(toDecimals(Number(totalPrice), 9)),
+                        hPrice: String(price),
                         json: `{ "name": "${
                             domain.level === 1
                                 ? `.${domain.fullName}`

@@ -1,6 +1,6 @@
 import { FC, memo, useCallback, useMemo } from 'react';
 import { cn } from '@bem-react/classname';
-import { Button, Title } from 'components';
+import { Button, BuyButton, Title } from 'components';
 import { Icons } from 'assets';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { buyDomainActions, domainsSelectors } from 'store';
@@ -81,7 +81,7 @@ export const DomainZone: FC = memo(() => {
                 </div>
             </div>
         );
-    }, []);
+    }, [isOwnerExist]);
 
     if (!domainZone) return null;
 
@@ -91,8 +91,8 @@ export const DomainZone: FC = memo(() => {
                 <Icons.Sphere />
             </div>
             <div className={CnDomainZone('content')}>
-                <div className={CnDomainZone('row')}>
-                    <div className={CnDomainZone('name', { isOwnerExist })}>
+                <div className={CnDomainZone('row', { isOwnerExist })}>
+                    <div className={CnDomainZone('name')}>
                         <div className={CnDomainZone('name-title')}>
                             .{domainZone.fullName}
                         </div>
@@ -107,13 +107,7 @@ export const DomainZone: FC = memo(() => {
                                 <Icons.Venom />
                                 {truncateNumbers(String(domainZone.price))}
                             </div>
-                            <Button
-                                onClick={buyClickHandler}
-                                view="action"
-                                size="s"
-                            >
-                                Buy now
-                            </Button>
+                            <BuyButton yellow onBuyClick={buyClickHandler} />
                         </div>
                     )}
                 </div>
@@ -127,13 +121,7 @@ export const DomainZone: FC = memo(() => {
                                 <Icons.Venom />
                                 {truncateNumbers(String(domainZone.price))}
                             </div>
-                            <Button
-                                onClick={buyClickHandler}
-                                view="action"
-                                size="s"
-                            >
-                                Buy now
-                            </Button>
+                            <BuyButton yellow onBuyClick={buyClickHandler} />
                         </div>
                     )}
                 </div>

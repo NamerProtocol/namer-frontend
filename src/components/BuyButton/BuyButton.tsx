@@ -9,20 +9,22 @@ const CnBuyButton = cn('buyButton');
 interface IBuyButtonProps {
     onBuyClick?: () => void;
     onAddToCartClick?: () => void;
+    yellow?: boolean;
 }
 
 export const BuyButton: FC<IBuyButtonProps> = ({
     onAddToCartClick,
     onBuyClick,
+    yellow = false,
 }) => {
     return (
-        <div className={CnBuyButton()}>
+        <div className={CnBuyButton({ yellow })}>
             <div onClick={onBuyClick} className={CnBuyButton('label')}>
                 Buy now
             </div>
-            {/* <div onClick={onAddToCartClick} className={CnBuyButton('icon')}>
+            <div onClick={onAddToCartClick} className={CnBuyButton('icon')}>
                 <Icons.Cart />
-            </div> */}
+            </div>
         </div>
     );
 };

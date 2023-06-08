@@ -28,6 +28,8 @@ export const buyDomainSlice = createSlice<
             buyDomainActions.setDomainToBuy,
             (state, { payload }) => {
                 state.domain = payload;
+                state.price = payload.price.toString();
+                state.feePerYear = String(Number(payload.price) * 0.01);
             },
         );
 

@@ -85,9 +85,6 @@ export const BuyDomainModal: FC = memo(() => {
                     <br />
                     Your name can be bought anytime for this price. Also this
                     price would be used to calculate annual renewal fee.
-                    <br />
-                    <br />
-                    See read more...
                 </div>
             </div>
         );
@@ -117,7 +114,7 @@ export const BuyDomainModal: FC = memo(() => {
                 </div>
                 <div className={CnBuyDomainModal('form-item')}>
                     <div className={CnBuyDomainModal('form-item-label')}>
-                        Your paiment per year
+                        Your payment per year
                     </div>
                     <div className={CnBuyDomainModal('form-item-descr')}>
                         You pay 1% of the price

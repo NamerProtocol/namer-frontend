@@ -10,6 +10,34 @@
     }
 
     &Item {
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        &-field {
+            margin-bottom: 12px;
+
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+
+            display: flex;
+            align-items: center;
+
+            color: #121212;
+
+            &_checkbox {
+                & svg {
+                    margin-right: 8px;
+                }
+            }
+
+            &_between {
+                justify-content: space-between;
+            }
+        }
+
         &-label {
             margin-bottom: 12px;
 

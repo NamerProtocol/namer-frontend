@@ -33,8 +33,13 @@ export const SearchDomains: FC = () => {
 
     return (
         <PageLayout className={CnSearchDomains()}>
-            <DomainZone />
             <div className={CnSearchDomains('layout')}>
+                <Title view="black" size="xs">
+                    Domain zone
+                </Title>
+
+                <DomainZone />
+
                 <Title view="black" size="xs">
                     Domain names
                 </Title>

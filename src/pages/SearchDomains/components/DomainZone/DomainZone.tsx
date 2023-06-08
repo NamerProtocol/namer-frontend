@@ -5,9 +5,10 @@ import { Icons } from 'assets';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { buyDomainActions, domainsSelectors } from 'store';
 import { getFormattedAddress } from 'utils/getFormattedAddress';
+import { useNavigate } from 'react-router-dom';
 
 import './DomainZone.scss';
-import { useNavigate } from 'react-router-dom';
+import { truncateNumbers } from 'utils/truncateNumbers';
 
 const CnDomainZone = cn('domainZone');
 
@@ -29,36 +30,23 @@ export const DomainZone: FC = memo(() => {
         navigate('?modal=buyDomain');
     }, [dispatch, domainZone, navigate]);
 
-    const domainZoneInfoContent = useMemo(() => {
-        if (!domainZone) return null;
+    const isOwnerExist = useMemo(() => !!domainZone?.owner, [domainZone]);
 
+    const domainZoneInfoContent = useMemo(() => {
         return (
-            <div className={CnDomainZone('info')}>
-                {domainZone.owner && (
-                    <div className={CnDomainZone('info-item')}>
-                        <div className={CnDomainZone('info-item-title')}>
-                            Owned by
-                        </div>
-                        <div className={CnDomainZone('info-item-value')}>
-                            <div className={CnDomainZone('ownedBy')}>
-                                {getFormattedAddress(domainZone.owner)}
-                            </div>
-                        </div>
-                    </div>
+            <div className={CnDomainZone('name-owner')}>
+                {domainZone?.owner ? (
+                    <>Owned by {getFormattedAddress(domainZone?.owner)}</>
+                ) : (
+                    <>Unregistered</>
                 )}
-                <div className={CnDomainZone('info-item')}>
-                    <div className={CnDomainZone('info-item-title')}>
-                        Top offer
-                    </div>
-                    <div className={CnDomainZone('info-item-value')}>
-                        {Math.floor(Math.random() * 10000)}$
-                    </div>
-                </div>
             </div>
         );
     }, [domainZone]);
 
     const domainZoneStatContent = useMemo(() => {
+        if (!isOwnerExist) return <div></div>;
+
         return (
             <div className={CnDomainZone('stat')}>
                 <div className={CnDomainZone('stat-item')}>
@@ -99,33 +87,55 @@ export const DomainZone: FC = memo(() => {
 
     return (
         <div className={CnDomainZone()}>
+            <div className={CnDomainZone('sphere')}>
+                <Icons.Sphere />
+            </div>
             <div className={CnDomainZone('content')}>
                 <div className={CnDomainZone('row')}>
-                    <div className={CnDomainZone('name')}>
-                        <Title size="xxs" uppercase>
-                            Domain zone
-                        </Title>
+                    <div className={CnDomainZone('name', { isOwnerExist })}>
                         <div className={CnDomainZone('name-title')}>
                             .{domainZone.fullName}
                         </div>
+                        <div className={CnDomainZone('name-owner')}>
+                            {domainZoneInfoContent}
+                        </div>
                     </div>
-
-                    {domainZoneInfoContent}
+                    {!isOwnerExist && (
+                        <div className={CnDomainZone('price')}>
+                            {/* <Button size="s">Make offer</Button> */}
+                            <div className={CnDomainZone('price-text')}>
+                                <Icons.Venom />
+                                {truncateNumbers(String(domainZone.price))}
+                            </div>
+                            <Button
+                                onClick={buyClickHandler}
+                                view="action"
+                                size="s"
+                            >
+                                Buy now
+                            </Button>
+                        </div>
+                    )}
                 </div>
 
                 <div className={CnDomainZone('row')}>
                     {domainZoneStatContent}
-                    <div className={CnDomainZone('actions')}>
-                        {/* <Button size="s">Make offer</Button> */}
-                        <Button
-                            onClick={buyClickHandler}
-                            view="action"
-                            size="s"
-                        >
-                            <Icons.Venom />
-                            {domainZone.price}
-                        </Button>
-                    </div>
+                    {isOwnerExist && (
+                        <div className={CnDomainZone('price')}>
+                            {/* <Button size="s">Make offer</Button> */}
+                            <div className={CnDomainZone('price-text')}>
+                                <Icons.Venom />
+                                {truncateNumbers(String(domainZone.price))}
+                            </div>
+                            <Button
+                                onClick={buyClickHandler}
+                                view="action"
+                                size="s"
+                            >
+                                Buy now
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -54,7 +54,7 @@ export const BuyDomainModal: FC = memo(() => {
 
         return (
             Number(fromDecimals(Number(feePerYear), 9)) +
-            fromDecimals(domain.price, 9)
+            fromDecimals(domain?.hPrice ? domain.hPrice : domain.price, 9)
         ).toFixed(2);
     }, [feePerYear, domain]);
 
@@ -70,6 +70,14 @@ export const BuyDomainModal: FC = memo(() => {
             // sendTransaction();
         } catch {}
     }, [buyDomain, domain, price, totalPrice]);
+
+    const mintingPriceContent = useMemo(() => {
+        if (domain?.hPrice) {
+            return fromDecimals(domain.hPrice, 9);
+        } else {
+            return fromDecimals(domain?.price as number, 9);
+        }
+    }, [domain]);
 
     const domainInfoContent = useMemo(() => {
         if (!domain) return null;
@@ -187,7 +195,7 @@ export const BuyDomainModal: FC = memo(() => {
                             className={CnBuyDomainModal('form-info-item-price')}
                         >
                             <Icons.Venom />
-                            {fromDecimals(domain.price, 9)}
+                            {mintingPriceContent}
                         </div>
                     </div>
                     <div className={CnBuyDomainModal('form-info-item')}>

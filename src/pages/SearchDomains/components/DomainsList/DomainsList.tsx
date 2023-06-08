@@ -31,10 +31,18 @@ const CnDomainsListItem = cn('domainsListItem');
 interface IDomainsListItem extends Domain {}
 
 export const DomainsListItem: FC<IDomainsListItem> = (domain) => {
-    const { fullName, price, level, owner } = domain;
+    const { fullName, price, level, owner, hPrice } = domain;
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const priceContent = useMemo(() => {
+        if (hPrice) {
+            return fromDecimals(hPrice, 9);
+        } else {
+            return fromDecimals(price, 9);
+        }
+    }, [price, hPrice]);
 
     const buyClickHandler = useCallback(() => {
         if (!domain.owner) {
@@ -54,7 +62,7 @@ export const DomainsListItem: FC<IDomainsListItem> = (domain) => {
             <div className={CnDomainsListItem('action')}>
                 <div className={CnDomainsListItem('price')}>
                     <Icons.Venom />
-                    {fromDecimals(price, 9)}
+                    {priceContent}
                 </div>
                 <div className={CnDomainsListItem('button')}>
                     <BuyButton onBuyClick={buyClickHandler} />

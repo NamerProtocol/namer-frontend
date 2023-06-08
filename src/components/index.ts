@@ -12,3 +12,4 @@ export { BuyDomainSuccessModal } from './BuyDomainSuccessModal';
 export { BuyDomainLoaderModal } from './BuyDomainLoaderModal';
 export { BuyDomainModal } from './BuyDomainModal';
 export { BackButton } from './BackButton';
+export { TransactionLoaderModal } from './TransactionLoaderModal';

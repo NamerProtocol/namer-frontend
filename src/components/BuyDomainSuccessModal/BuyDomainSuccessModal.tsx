@@ -7,6 +7,7 @@ import './BuyDomainSuccessModal.scss';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { buyDomainActions, buyDomainSelectors } from 'store';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { fromDecimals } from 'utils/decimals';
 
 const domainGif = require('assets/images/domain-image.gif');
 
@@ -50,7 +51,7 @@ export const BuyDomainSuccessModal: FC = () => {
                     </div>
                     <div className={CnBuyDomainSuccessModal('price-value')}>
                         <Icons.Venom />
-                        {domain?.price}
+                        {fromDecimals(domain?.price as number, 9)}
                     </div>
                 </div>
 

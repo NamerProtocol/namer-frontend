@@ -8,6 +8,7 @@ import { ReactComponent as Close } from './icons/close.svg';
 import { ReactComponent as Namer } from './icons/namer.svg';
 import { ReactComponent as Loader } from './icons/loader.svg';
 import { ReactComponent as Sphere } from './images/sphere.svg';
+import { ReactComponent as Info } from './icons/info.svg';
 
 export const Icons = {
     Search,
@@ -20,4 +21,5 @@ export const Icons = {
     Loader,
     ArrowLeft,
     Sphere,
+    Info,
 };

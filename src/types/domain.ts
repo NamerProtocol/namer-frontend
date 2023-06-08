@@ -1,5 +1,7 @@
 export interface Domain {
     id: string;
+    address: string;
+    hPrice: number;
     name: string;
     parentId: string;
     price: number;

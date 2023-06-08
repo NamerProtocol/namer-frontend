@@ -14,16 +14,16 @@ const navItems = [
     },
     {
         to: '#price',
-        text: 'Price & Payment',
+        text: "Harberger's price",
     },
     {
         to: '#royalty',
         text: 'Royalty & Settings',
     },
-    {
-        to: '#subdomains',
-        text: 'Subdomains',
-    },
+    // {
+    //     to: '#subdomains',
+    //     text: 'Subdomains',
+    // },
 ];
 
 export const Navigation: FC = memo(() => {
@@ -34,14 +34,6 @@ export const Navigation: FC = memo(() => {
         <div className={CnNavigation()}>
             {navItems.map(({ to, text }) => {
                 const isSelected = hash ? hash === to : to === '#zone';
-
-                if (
-                    to === '#subdomains' &&
-                    domain &&
-                    !domain.subDomains.length
-                ) {
-                    return null;
-                }
 
                 return (
                     <Link

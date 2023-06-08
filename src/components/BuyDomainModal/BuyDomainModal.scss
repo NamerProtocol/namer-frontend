@@ -6,6 +6,47 @@
         justify-content: space-between;
     }
 
+    &-popup {
+        position: absolute;
+        display: none;
+
+        width: 400px;
+
+        z-index: 1000;
+
+        top: 100%;
+        left: 100%;
+
+        background: #202020;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+
+        text-decoration: none;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 24px;
+
+        padding: 16px 20px;
+
+        &-title {
+            text-decoration: none;
+
+            font-weight: 500;
+
+            color: #FFFFFF;
+
+            margin-bottom: 12px;
+        }
+
+        &-text {
+            text-decoration: none;
+
+            font-weight: 400;
+
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
     &-info {
         width: 50%;
 
@@ -20,6 +61,24 @@
             line-height: 21px;
 
             color: #FFFFFF;
+
+            &-popup {
+                cursor: pointer;
+
+                position: relative;
+
+                text-decoration: underline;
+
+                &:hover {
+                    & .buyDomainModal-popup {
+                        display: block;
+                    }
+                }
+
+                & svg {
+                    margin-left: 5px;
+                }
+            }
         }
     }
 

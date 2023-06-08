@@ -4,10 +4,11 @@ import { Domain } from 'types';
 import { BuyButton } from 'components';
 import { Icons } from 'assets';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { buyDomainActions, domainsSelectors } from 'store';
+import { useNavigate } from 'react-router-dom';
 
 import './DomainsList.scss';
-import { useNavigate } from 'react-router-dom';
+import { buyDomainActions } from 'store';
+import { fromDecimals } from 'utils/decimals';
 
 const CnDomainsList = cn('domainsList');
 
@@ -17,8 +18,8 @@ interface IDomainsListProps {
 
 export const DomainsList: FC<IDomainsListProps> = ({ items }) => {
     const domainsContent = useMemo(() => {
-        return items.map((domain) => (
-            <DomainsListItem key={domain.id} {...domain} />
+        return items.map((domain, index) => (
+            <DomainsListItem key={`${domain.id}${index}`} {...domain} />
         ));
     }, [items]);
 
@@ -30,14 +31,17 @@ const CnDomainsListItem = cn('domainsListItem');
 interface IDomainsListItem extends Domain {}
 
 export const DomainsListItem: FC<IDomainsListItem> = (domain) => {
-    const { fullName, price, level } = domain;
+    const { fullName, price, level, owner } = domain;
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const buyClickHandler = useCallback(() => {
-        dispatch(buyDomainActions.setDomainToBuy(domain));
-        navigate('?modal=buyDomain');
+        if (!domain.owner) {
+            console.log(domain.owner);
+            dispatch(buyDomainActions.setDomainToBuy(domain));
+            navigate('?modal=buyDomain');
+        }
     }, [dispatch, domain, navigate]);
 
     return (
@@ -50,7 +54,7 @@ export const DomainsListItem: FC<IDomainsListItem> = (domain) => {
             <div className={CnDomainsListItem('action')}>
                 <div className={CnDomainsListItem('price')}>
                     <Icons.Venom />
-                    {price}
+                    {fromDecimals(price, 9)}
                 </div>
                 <div className={CnDomainsListItem('button')}>
                     <BuyButton onBuyClick={buyClickHandler} />

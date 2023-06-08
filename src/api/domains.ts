@@ -34,6 +34,12 @@ export const fetchDomainsByIdRequest = async (id: string) => {
         .then((res) => res.data);
 };
 
+export const fetchDomainsFromContractRequest = async () => {
+    return await axios
+        .post(`${domainsApiUrl}/domain/fetch`)
+        .then((res) => res.data);
+};
+
 export const fetchDomainUpdateRequest = async ({
     id,
     owner,

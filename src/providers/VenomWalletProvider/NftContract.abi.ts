@@ -15,8 +15,29 @@ export const nftContractABI = {
         },
         {
             name: 'mintNft',
-            inputs: [{ name: 'json', type: 'string' }],
+            inputs: [
+                { name: 'root', type: 'address' },
+                { name: 'hPrice', type: 'uint128' },
+                { name: 'name', type: 'string' },
+                { name: 'json', type: 'string' },
+            ],
             outputs: [],
+        },
+        {
+            name: 'setSubDomainPrice',
+            inputs: [
+                { name: 'domain', type: 'address' },
+                { name: 'price', type: 'uint128' },
+            ],
+            outputs: [],
+        },
+        {
+            name: 'getSubDomainPrice',
+            inputs: [
+                { name: 'answerId', type: 'uint32' },
+                { name: 'domain', type: 'address' },
+            ],
+            outputs: [{ name: 'subPrice', type: 'uint128' }],
         },
         {
             name: 'indexBasisCode',
@@ -119,5 +140,10 @@ export const nftContractABI = {
         { name: '_deployIndexBasisValue', type: 'uint128' },
         { name: '_nonce', type: 'uint8' },
         { name: '_remainOnNft', type: 'uint128' },
+        { name: 'subDomainPrices', type: 'map(address,uint128)' },
+        { name: 'mintedNames', type: 'map(uint256,bool)' },
+        { name: 'idToOwner', type: 'map(uint256,address)' },
+        { name: 'adddressToOwner', type: 'map(address,address)' },
+        { name: 'registeredUntil', type: 'map(address,uint128)' },
     ],
 };

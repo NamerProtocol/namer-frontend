@@ -76,7 +76,7 @@ export const DomainFilters: FC = () => {
                                 stroke-width="2"
                             />
                         </svg>
-                        Registered
+                        Not registered
                     </div>
                 </div>
             </div>

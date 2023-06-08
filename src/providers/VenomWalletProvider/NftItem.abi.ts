@@ -7,6 +7,9 @@ export const nftItemABI = {
             name: 'constructor',
             inputs: [
                 { name: 'owner', type: 'address' },
+                { name: '_root', type: 'address' },
+                { name: '_name', type: 'string' },
+                { name: '_price', type: 'uint128' },
                 { name: 'sendGasTo', type: 'address' },
                 { name: 'remainOnNft', type: 'uint128' },
                 { name: 'json', type: 'string' },
@@ -15,6 +18,21 @@ export const nftItemABI = {
                 { name: 'indexDestroyValue', type: 'uint128' },
             ],
             outputs: [],
+        },
+        {
+            name: 'getDomainInfo',
+            inputs: [{ name: 'answerId', type: 'uint32' }],
+            outputs: [
+                { name: 'domainOwner', type: 'address' },
+                { name: 'domainRoot', type: 'address' },
+                { name: 'domainName', type: 'string' },
+                { name: 'domainHPrice', type: 'uint128' },
+            ],
+        },
+        {
+            name: 'getName',
+            inputs: [{ name: 'answerId', type: 'uint32' }],
+            outputs: [{ name: 'value0', type: 'string' }],
         },
         {
             name: 'indexCode',
@@ -159,5 +177,8 @@ export const nftItemABI = {
         { name: '_indexDeployValue', type: 'uint128' },
         { name: '_indexDestroyValue', type: 'uint128' },
         { name: '_codeIndex', type: 'cell' },
+        { name: 'root', type: 'address' },
+        { name: 'hPrice', type: 'uint128' },
+        { name: 'name', type: 'string' },
     ],
 };

@@ -9,8 +9,14 @@ import { Domain } from 'types';
 import {
     fetchDomainCreateRequest,
     fetchDomainUpdateRequest,
+    fetchDomainsByIdRequest,
+    fetchDomainsFromContractRequest,
 } from 'api/domains';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toDecimals } from 'utils/decimals';
+import { useAppDispatch } from 'hooks';
+import { domainConfigurationActions } from 'store/domainConfiguration/domainConfiguration.action';
+import { useDispatch } from 'react-redux';
 
 const initTheme = 'dark' as const;
 
@@ -61,6 +67,8 @@ const themesList = ['light', 'dark', 'venom'];
 
 export const VenomWalletProvider: FC<any> = ({ children }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useAppDispatch();
 
     const [venomConnect, setVenomConnect] = useState<VenomConnect | null>(null);
     const [venomProvider, setVenomProvider] = useState<any>();
@@ -169,7 +177,7 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
             const tokenWalletContract = new venomProvider.Contract(
                 nftContractABI,
                 new Address(
-                    '0:85ac9e08f378369780c070b0490e84f55d523327e4adb645915e17422fce967b',
+                    '0:b171f92b348dfebff0098e58e43cfe36ee054092e5d79157c0b0fef1903d89a5',
                 ),
             );
             console.log(tokenWalletContract);
@@ -188,7 +196,7 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
 
     const getNftCodeHash = async (): Promise<string> => {
         const collectionAddress = new Address(
-            '0:85ac9e08f378369780c070b0490e84f55d523327e4adb645915e17422fce967b',
+            '0:b171f92b348dfebff0098e58e43cfe36ee054092e5d79157c0b0fef1903d89a5',
         );
 
         const contract = new venomProvider.Contract(
@@ -231,46 +239,57 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
                 navigate('?modal=buyDomainLoader');
 
                 if (!venomProvider) return;
-                // TokenWallet address was passed here from somewhere (from NftAuction component)
-                const tokenWalletContract = new venomProvider.Contract(
+
+                const nftMinterContract = new venomProvider.Contract(
                     nftContractABI,
                     new Address(
-                        '0:85ac9e08f378369780c070b0490e84f55d523327e4adb645915e17422fce967b',
+                        '0:01a2164e2b66a4b3eefc23f831d778fb0a7018148d1938d99c874588fd7a1965',
                     ),
                 );
-                console.log(tokenWalletContract);
-                // Just a common call of smart contract, nothing special and pretty easy
-                // The only one difference - usage of .send() function
-                // When we use send(), firstly we call our venom wallet (logged user's wallet) and then venom wallet will call our target contract internally (by sendTransaction method)
-                // So you need to call send() when you own callee internally (by wallet address)
+
                 // await tokenWalletContract.methods.mint().send({
                 //     from: address,
                 //     amount: String(Number(totalPrice) * 10 ** 9),
                 // });
-                await tokenWalletContract.methods
-                    .mintNft({ json: `{ name: 'hello world' }` })
+
+                const parentDomain = await fetchDomainsByIdRequest(
+                    domain.parentId,
+                );
+
+                await nftMinterContract.methods
+                    .mintNft({
+                        root: parentDomain.address,
+                        name: domain.name,
+                        hPrice: String(toDecimals(Number(totalPrice), 9)),
+                        json: `{ "name": "${
+                            domain.level === 1
+                                ? `.${domain.fullName}`
+                                : domain.fullName
+                        }" }`,
+                    })
                     .send({
                         from: address,
-                        amount: String(Number(totalPrice) * 10 ** 9),
+                        amount: String(toDecimals(Number(totalPrice) + 3, 9)),
                     });
                 // .send({ from: new Address(address), amount: getValueForSend(1), bounce: true });
+                await fetchDomainsFromContractRequest();
+                // if (domain.id) {
+                //     await fetchDomainUpdateRequest({
+                //         id: domain.id,
+                //         owner: address,
+                //         price: Number(price),
+                //     });
+                // } else {
+                //     await fetchDomainCreateRequest({
+                //         price: Number(price),
+                //         parentId: domain.parentId
+                //             ? domain.parentId
+                //             : '383ab958-5225-4f4e-9fa1-1a037a25b163',
+                //         owner: address,
+                //         name: domain.name,
+                //     });
+                // }
 
-                if (domain.id) {
-                    await fetchDomainUpdateRequest({
-                        id: domain.id,
-                        owner: address,
-                        price: Number(price),
-                    });
-                } else {
-                    await fetchDomainCreateRequest({
-                        price: Number(price),
-                        parentId: domain.parentId
-                            ? domain.parentId
-                            : '383ab958-5225-4f4e-9fa1-1a037a25b163',
-                        owner: address,
-                        name: domain.name,
-                    });
-                }
                 navigate('?modal=buyDomainSuccess');
             } catch (err) {
                 console.log(err);
@@ -279,6 +298,45 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
             }
         },
         [address, navigate, venomProvider],
+    );
+
+    const updateSubDomainsPrice = useCallback(
+        async (domainAddress: string, price: string, domainId: string) => {
+            try {
+                navigate('?modal=transactionLoader');
+
+                if (!venomProvider) return;
+
+                const nftMinterContract = new venomProvider.Contract(
+                    nftContractABI,
+                    new Address(
+                        '0:01a2164e2b66a4b3eefc23f831d778fb0a7018148d1938d99c874588fd7a1965',
+                    ),
+                );
+
+                const totalPrice = toDecimals(Number(price), 9);
+
+                await nftMinterContract.methods
+                    .setSubDomainPrice({
+                        domain: domainAddress,
+                        price: totalPrice,
+                    })
+                    .send({
+                        from: address,
+                        amount: String(toDecimals(2, 9)),
+                    });
+
+                await fetchDomainsFromContractRequest();
+
+                navigate('/account/domains');
+                dispatch(domainConfigurationActions.fetchDomainById(domainId));
+            } catch (err) {
+                console.log(err);
+                navigate(location.pathname);
+            } finally {
+            }
+        },
+        [address, navigate, venomProvider, location, dispatch],
     );
 
     useEffect(() => {
@@ -300,6 +358,7 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
                 sendTransaction,
                 getNftCodeHash,
                 buyDomain,
+                updateSubDomainsPrice,
             }}
         >
             {children}

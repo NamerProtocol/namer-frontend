@@ -15,6 +15,7 @@ import './BuyDomainModal.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { buyDomainActions, buyDomainSelectors } from 'store';
 import { useDispatch } from 'react-redux';
+import { fromDecimals, toDecimals } from 'utils/decimals';
 
 const domainGif = require('assets/images/domain-image.gif');
 
@@ -38,7 +39,11 @@ export const BuyDomainModal: FC = memo(() => {
     const priceChangeCallback = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             if (!isNaN(Number(e.target.value))) {
-                dispatch(buyDomainActions.setPrice(e.target.value));
+                dispatch(
+                    buyDomainActions.setPrice(
+                        toDecimals(Number(e.target.value), 9).toString(),
+                    ),
+                );
             }
         },
         [dispatch],
@@ -47,11 +52,13 @@ export const BuyDomainModal: FC = memo(() => {
     const totalPrice = useMemo(() => {
         if (!domain) return null;
 
-        return (Number(feePerYear) + domain.price).toFixed(2);
+        return (
+            Number(fromDecimals(Number(feePerYear), 9)) +
+            fromDecimals(domain.price, 9)
+        ).toFixed(2);
     }, [feePerYear, domain]);
 
-    const { address, connect, disconnect, buyDomain, sendTransaction } =
-        useVenom();
+    const { address, connect, buyDomain } = useVenom();
 
     const isWalletConnected = useMemo(() => !!address, [address]);
 
@@ -79,12 +86,36 @@ export const BuyDomainModal: FC = memo(() => {
                 </div>
 
                 <div className={CnBuyDomainModal('info-text')}>
-                    Yahoo! You want to buy a domain name. First we need to know:
-                    how much does it cost you? How much does it worth for you?
+                    Namer uses Harberger's tax to allocate names to users who
+                    value them the most.
+                    <br />
+                    <br />A user must specify how much they value a name by
+                    setting its{' '}
+                    <a className={CnBuyDomainModal('info-text-popup')}>
+                        Harberger's price
+                        <Icons.Info />
+                        <div className={CnBuyDomainModal('popup')}>
+                            <div className={CnBuyDomainModal('popup-title')}>
+                                What is Harberger tax?
+                            </div>
+
+                            <div className={CnBuyDomainModal('popup-text')}>
+                                Harberger tax is a special tax on things people
+                                own, like houses or cars. It's unique because
+                                owners have to say how much they would sell
+                                their things for. If someone wants to buy it,
+                                they can pay that price, become the new owner,
+                                and pay the tax themselves.This helps make sure
+                                people use their things well and keeps the
+                                prices fair.
+                            </div>
+                        </div>
+                    </a>
                     <br />
                     <br />
-                    Your name can be bought anytime for this price. Also this
-                    price would be used to calculate annual renewal fee.
+                    This name can be bought anytime for that price. To make sure
+                    that the users set reasonable prices, Namer charges a
+                    renewal fee as 1% of the Harberger's price.
                 </div>
             </div>
         );
@@ -97,16 +128,17 @@ export const BuyDomainModal: FC = memo(() => {
             <div className={CnBuyDomainModal('form')}>
                 <div className={CnBuyDomainModal('form-item')}>
                     <div className={CnBuyDomainModal('form-item-label')}>
-                        Price
+                        Harberger’s price
                     </div>
                     <div className={CnBuyDomainModal('form-item-descr')}>
-                        Enter how much do you estimate the cost of a domain. For
-                        this price other buyers will be able to buy your domain
+                        Others will be able to buy your domain for this price at
+                        any time. The higher value you specify, the higher your
+                        annual fee will be.
                     </div>
                     <div className={CnBuyDomainModal('form-item-field')}>
                         <Input
                             view="white"
-                            value={price}
+                            value={fromDecimals(Number(price), 9)}
                             onChange={priceChangeCallback}
                             icon={<Icons.Venom color="#A0A0A0" />}
                         />
@@ -123,7 +155,7 @@ export const BuyDomainModal: FC = memo(() => {
                         <Input
                             disabled
                             view="dark"
-                            value={feePerYear}
+                            value={fromDecimals(Number(feePerYear), 9)}
                             icon={<Icons.Venom color="#A0A0A0" />}
                         />
                     </div>
@@ -155,20 +187,20 @@ export const BuyDomainModal: FC = memo(() => {
                             className={CnBuyDomainModal('form-info-item-price')}
                         >
                             <Icons.Venom />
-                            {domain.price}
+                            {fromDecimals(domain.price, 9)}
                         </div>
                     </div>
                     <div className={CnBuyDomainModal('form-info-item')}>
                         <div
                             className={CnBuyDomainModal('form-info-item-label')}
                         >
-                            Fee for 1 year
+                            Annual fee
                         </div>
                         <div
                             className={CnBuyDomainModal('form-info-item-price')}
                         >
                             <Icons.Venom />
-                            {feePerYear}
+                            {fromDecimals(Number(feePerYear), 9)}
                         </div>
                     </div>
                     <div className={CnBuyDomainModal('form-info-item')}>

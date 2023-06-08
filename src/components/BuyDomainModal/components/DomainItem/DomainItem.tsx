@@ -4,6 +4,7 @@ import { Domain } from 'types';
 
 import './DomainItem.scss';
 import { Icons } from 'assets';
+import { fromDecimals } from 'utils/decimals';
 
 const CnDomainItem = cn('domainItem');
 
@@ -20,7 +21,7 @@ export const DomainItem: FC<IDomainItem> = memo(({ fullName, price }) => {
             </div>
             <div className={CnDomainItem('price')}>
                 <Icons.Venom />
-                {price}
+                {fromDecimals(price, 9)}
             </div>
         </div>
     );

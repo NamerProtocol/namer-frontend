@@ -16,11 +16,11 @@ export const SearchDomains: FC = () => {
     const domainNamesItems = useMemo(() => {
         const result: any = [];
 
-        if (!domainsSearch.exactMatch) return result;
+        // if (!domainsSearch.exactMatch) return result;
 
-        if (domainsSearch.exactMatch?.level !== 1) {
-            result.push(domainsSearch.exactMatch);
-        }
+        // if (domainsSearch.exactMatch?.level !== 1) {
+        //     result.push(domainsSearch.exactMatch);
+        // }
 
         result.push(...domainsSearch.differentZones);
 

@@ -8,6 +8,7 @@ import { FetchStatus } from 'types';
 
 import './SubdomainsForm.scss';
 import { useNavigate } from 'react-router-dom';
+import { fromDecimals } from 'utils/decimals';
 
 const CnSubdomainsForm = cn('subdomainsForm');
 
@@ -39,7 +40,7 @@ export const SubdomainsForm: FC = memo(() => {
                         <div className={CnSubdomainsForm('item-right')}>
                             <div className={CnSubdomainsForm('item-price')}>
                                 <Icons.Venom color="#A0A0A0" />
-                                {item.price}
+                                {fromDecimals(item.price, 9)}
                             </div>
 
                             <Button

@@ -7,6 +7,7 @@ import { domainConfigurationActions } from 'store/domainConfiguration/domainConf
 import { FetchStatus } from 'types';
 
 import './PriceForm.scss';
+import { fromDecimals, toDecimals } from 'utils/decimals';
 
 const CnPriceForm = cn('priceForm');
 
@@ -30,7 +31,7 @@ export const PriceForm: FC = memo(() => {
                 dispatch(
                     domainConfigurationActions.updateDomain({
                         key,
-                        value: e.target.value,
+                        value: toDecimals(Number(e.target.value), 9),
                     }),
                 );
             };
@@ -45,17 +46,19 @@ export const PriceForm: FC = memo(() => {
     return (
         <div className={CnPriceForm()}>
             <Title view="black" size="xs">
-                Price & Payment
+                Harberger price
             </Title>
             <div className={CnPriceForm('item')}>
                 <div className={CnPriceForm('item-label')}>Price</div>
                 <div className={CnPriceForm('item-sublabel')}>
-                    Enter how much do you estimate the cost of a domain
+                    Others will be able to buy your domain for this price at any
+                    time. The higher value you specify, the higher your annual
+                    fee will be.
                 </div>
                 <div className={CnPriceForm('item-field')}>
                     <Input
-                        value={domain.price}
-                        onChange={priceChangeCallback('price')}
+                        disabled
+                        value={fromDecimals(domain.price, 9)}
                         view="white"
                         bordered
                         placeholder="2000"
@@ -76,7 +79,9 @@ export const PriceForm: FC = memo(() => {
                         value={configuration['pricePerYear']}
                         disabled
                         view="gray"
-                        placeholder="20"
+                        placeholder={String(
+                            fromDecimals(domain.price, 9) * 0.01,
+                        )}
                         icon={<Icons.Venom color="#A0A0A0" />}
                     />
                 </div>

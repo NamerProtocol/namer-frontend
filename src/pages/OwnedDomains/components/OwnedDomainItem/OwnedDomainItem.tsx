@@ -7,10 +7,16 @@ import { Button } from 'components';
 import { useNavigate } from 'react-router-dom';
 
 import './OwnedDomainItem.scss';
+import { fromDecimals } from 'utils/decimals';
 
 const CnOwnedDomainItem = cn('ownedDomainItem');
 
-export const OwnedDomainItem: FC<Domain> = ({ fullName, price, id }) => {
+export const OwnedDomainItem: FC<Domain> = ({
+    fullName,
+    price,
+    id,
+    hPrice,
+}) => {
     const navigate = useNavigate();
 
     const clickCallback = useCallback(() => {
@@ -33,7 +39,7 @@ export const OwnedDomainItem: FC<Domain> = ({ fullName, price, id }) => {
             <div className={CnOwnedDomainItem('right')}>
                 <div className={CnOwnedDomainItem('price')}>
                     <Icons.Venom />
-                    {price}
+                    {fromDecimals(hPrice, 9)}
                 </div>
 
                 <Button onClick={clickCallback} view="bordered" size="s">

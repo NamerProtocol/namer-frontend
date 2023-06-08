@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './DomainZone.scss';
 import { truncateNumbers } from 'utils/truncateNumbers';
+import { fromDecimals } from 'utils/decimals';
 
 const CnDomainZone = cn('domainZone');
 
@@ -38,7 +39,7 @@ export const DomainZone: FC = memo(() => {
                 {domainZone?.owner ? (
                     <>Owned by {getFormattedAddress(domainZone?.owner)}</>
                 ) : (
-                    <>Unregistered</>
+                    <>Not registered</>
                 )}
             </div>
         );
@@ -105,7 +106,9 @@ export const DomainZone: FC = memo(() => {
                             {/* <Button size="s">Make offer</Button> */}
                             <div className={CnDomainZone('price-text')}>
                                 <Icons.Venom />
-                                {truncateNumbers(String(domainZone.price))}
+                                {truncateNumbers(
+                                    String(fromDecimals(domainZone.price, 9)),
+                                )}
                             </div>
                             <BuyButton yellow onBuyClick={buyClickHandler} />
                         </div>
@@ -119,7 +122,9 @@ export const DomainZone: FC = memo(() => {
                             {/* <Button size="s">Make offer</Button> */}
                             <div className={CnDomainZone('price-text')}>
                                 <Icons.Venom />
-                                {truncateNumbers(String(domainZone.price))}
+                                {truncateNumbers(
+                                    String(fromDecimals(domainZone.price, 9)),
+                                )}
                             </div>
                             <BuyButton yellow onBuyClick={buyClickHandler} />
                         </div>

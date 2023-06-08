@@ -328,12 +328,10 @@ export const VenomWalletProvider: FC<any> = ({ children }) => {
 
                 await fetchDomainsFromContractRequest();
 
-                navigate('/account/domains');
                 dispatch(domainConfigurationActions.fetchDomainById(domainId));
             } catch (err) {
-                console.log(err);
-                navigate(location.pathname);
             } finally {
+                navigate(location.pathname);
             }
         },
         [address, navigate, venomProvider, location, dispatch],

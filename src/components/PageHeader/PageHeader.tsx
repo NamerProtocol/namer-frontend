@@ -24,6 +24,13 @@ export const PageHeader: FC = memo(() => {
         [dispatch],
     );
 
+    const buttonClickCallback = useCallback(() => {
+        dispatch(domainsActions.fetchDomainsByKeyword(search));
+        if (location.pathname !== '/search') {
+            navigate('/search');
+        }
+    }, [navigate, dispatch, search, location]);
+
     const onKeyDown = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === 'Enter') {
@@ -52,7 +59,10 @@ export const PageHeader: FC = memo(() => {
                             placeholder="Search"
                             view="white"
                         />
-                        <div className={CnPageHeader('search-action')}>
+                        <div
+                            onClick={buttonClickCallback}
+                            className={CnPageHeader('search-action')}
+                        >
                             <Icons.Search />
                         </div>
                     </div>

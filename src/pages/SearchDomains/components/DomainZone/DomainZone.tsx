@@ -122,9 +122,20 @@ export const DomainZone: FC = memo(() => {
                             {/* <Button size="s">Make offer</Button> */}
                             <div className={CnDomainZone('price-text')}>
                                 <Icons.Venom />
-                                {truncateNumbers(
-                                    String(fromDecimals(domainZone.price, 9)),
-                                )}
+                                {domainZone.address
+                                    ? truncateNumbers(
+                                          String(
+                                              fromDecimals(
+                                                  domainZone.hPrice,
+                                                  9,
+                                              ),
+                                          ),
+                                      )
+                                    : truncateNumbers(
+                                          String(
+                                              fromDecimals(domainZone.price, 9),
+                                          ),
+                                      )}
                             </div>
                             <BuyButton yellow onBuyClick={buyClickHandler} />
                         </div>

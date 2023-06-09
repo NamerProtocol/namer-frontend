@@ -58,7 +58,7 @@ export const PriceForm: FC = memo(() => {
                 <div className={CnPriceForm('item-field')}>
                     <Input
                         disabled
-                        value={fromDecimals(domain.price, 9)}
+                        value={fromDecimals(domain.hPrice, 9)}
                         view="white"
                         bordered
                         placeholder="2000"
@@ -80,14 +80,14 @@ export const PriceForm: FC = memo(() => {
                         disabled
                         view="gray"
                         placeholder={String(
-                            fromDecimals(domain.price, 9) * 0.01,
+                            fromDecimals(domain.hPrice, 9) * 0.01,
                         )}
                         icon={<Icons.Venom color="#A0A0A0" />}
                     />
                 </div>
             </div>
 
-            <div className={CnPriceForm('action')}>
+            {/* <div className={CnPriceForm('action')}>
                 <Button
                     onClick={submitClickCallback}
                     disabled={isSubmitDisabled}
@@ -95,7 +95,7 @@ export const PriceForm: FC = memo(() => {
                 >
                     Save
                 </Button>
-            </div>
+            </div> */}
         </div>
     );
 });
